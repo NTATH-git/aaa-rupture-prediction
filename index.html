@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>破裂腹部大動脈瘤 術前予測の後ろ向き検証（症例研究）</title>
+<meta name="description" content="破裂前CTからの壁応力・血流解析と、実際の破裂部位・術後経過の照合（匿名化症例研究）">
+<style>
+  :root{ --bg:#0f1216; --card:#171b21; --ink:#e8ecf1; --mut:#9aa7b5; --line:#262d36;
+         --accent:#e5484d; --good:#3ecf8e; --warn:#f5a524; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:-apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;line-height:1.7}
+  header{padding:44px 24px 30px;border-bottom:1px solid var(--line);
+         background:radial-gradient(1200px 320px at 20% -10%, #1b2430 0%, transparent 60%)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1{font-size:26px;margin:0 0 6px;letter-spacing:.01em}
+  .sub{color:var(--mut);font-size:14px}
+  .pill{display:inline-block;font-size:12px;color:var(--mut);border:1px solid var(--line);
+        border-radius:999px;padding:3px 10px;margin:8px 6px 0 0}
+  section{padding:34px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:19px;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+  h2 .n{color:var(--accent);font-variant-numeric:tabular-nums}
+  .lead{color:var(--mut);margin:0 0 18px;font-size:14.5px}
+  figure{margin:0 0 8px}
+  img,video{width:100%;border-radius:12px;border:1px solid var(--line);background:#000;display:block}
+  figcaption{color:var(--mut);font-size:12.5px;margin-top:8px}
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:1fr 1fr}
+  @media(max-width:720px){.g2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  th{color:var(--mut);font-weight:600}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .key{color:var(--good);font-weight:700}
+  .flag{color:var(--warn)}
+  ul{margin:8px 0 0;padding-left:20px} li{margin:4px 0}
+  .foot{color:var(--mut);font-size:12px;padding:24px 0 60px}
+  .tag{font-size:11px;padding:2px 8px;border-radius:6px;background:#20272f;color:var(--mut);margin-right:6px}
+  a{color:#7db9ff}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>破裂腹部大動脈瘤における 術前壁応力予測と破裂部位の後ろ向き検証</h1>
+  <div class="sub">単一症例・後ろ向き解析（匿名化）&nbsp;|&nbsp; 腎下部AAA</div>
+  <div>
+    <span class="pill">術前CT（破裂の約9.5か月前）</span>
+    <span class="pill">破裂</span>
+    <span class="pill">術後（人工血管置換後）</span>
+  </div>
+</div></header>
+
+<div class="wrap">
+
+<section>
+  <h2><span class="n">0</span> 概要</h2>
+  <p class="lead">同一患者の腎下部腹部大動脈瘤について、<b>破裂の約9.5か月前の待機CT</b>から血流(CFD)・壁応力(FEA)を計算し、
+  実際の<b>破裂部位（後壁・左・分岐部から約5cm頭側）</b>および術後経過と照合した後ろ向き検証。</p>
+  <div class="card">
+    <b>要点</b>
+    <ul>
+      <li>壁応力FEA上の<b>高応力部位が、実際の破裂部位と一致</b>（術中所見・破裂CTで同定）。</li>
+      <li>破裂前 → 破裂 → 術後の3時点で瘤の<b>増大・破裂・修復</b>を三次元的に可視化。</li>
+      <li>血流CFDでは瘤中央が<b>低WSS＋高OSI（血栓形成環境）</b>。壁応力（破裂力）と合わせ二面から評価。</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">1</span> 自然史 — 大動脈3時点 3D再構成</h2>
+  <p class="lead">動脈相CTから大動脈をセグメントし、同一配色・同一視点で比較。瘤の増大 → 破裂 → 人工血管置換が読み取れる。</p>
+  <figure>
+    <img src="assets/fig1_natural_history.png" alt="3時点の大動脈3D再構成">
+    <figcaption>左：術前（中等度の紡錘状AAA）／中：破裂時（瘤が明らかに増大）／右：術後（Y字グラフトで瘤を除外）。</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2><span class="n">2</span> 壁応力 FEA（腎動脈込みモデル）</h2>
+  <p class="lead">腎ネック〜左右腎動脈〜AAA嚢〜分岐〜左右腸骨の中空壁シェル（実効厚1.9mm）。線形弾性 E=2 MPa, ν=0.45,
+  内圧 16 kPa（120 mmHg）、端＋分枝出口固定。<span class="tag">meshpy tetgen-hole</span><span class="tag">約110万四面体</span></p>
+  <div class="grid g2">
+    <figure>
+      <video src="assets/vid1_wallstress_pulsatile.mp4" controls loop muted playsinline></video>
+      <figcaption>拍動する壁応力（回転＋心拍 80↔120 mmHg で色が拍動）。青=低, 赤=peak wall stress。</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/fig2_wallstress_anterior.png" alt="壁応力 前面">
+      <figcaption>壁応力マップ（前面）。高応力帯（赤）は嚢の稜線・くびれ部。</figcaption>
+    </figure>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <table>
+      <tr><th>部位</th><th class="num">median (kPa)</th><th class="num">p95 (kPa)</th></tr>
+      <tr><td>AAA嚢</td><td class="num">158</td><td class="num">351</td></tr>
+      <tr><td>腎レベル</td><td class="num">129</td><td class="num">305</td></tr>
+      <tr><td>壁全体</td><td class="num">106</td><td class="num">301</td></tr>
+    </table>
+    <div class="sub">嚢の median 158 kPa は複数のメッシュ設定で一貫し頑健。</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> 破裂部位との照合</h2>
+  <p class="lead">実破裂部位（後壁・左・分岐部+約5cm）を3Dモデル上に指定し、壁応力・血流指標と重ねた。</p>
+  <div class="grid g2">
+    <figure>
+      <img src="assets/fig3_rupture_overlay.png" alt="破裂部位オーバーレイ">
+      <figcaption>壁応力マップ（後面）＋実破裂部位。高応力帯が破裂部位に一致。</figcaption>
+    </figure>
+    <div class="card">
+      <b>照合の位置づけ</b>
+      <ul>
+        <li><span class="key">陽性所見：</span>壁応力の高値領域と実破裂部位が一致。</li>
+        <li><span class="flag">精緻化予定：</span>破裂CTでの厳密な位置決めと ILT（壁在血栓）モデル化により定量照合を強化。</li>
+        <li>破裂＝<b>局所応力 ≧ 局所強度</b>。応力(FEA)＝力、低WSS/高OSI/ILT＝壁の脆弱化。両者の重なりが破裂リスク最大部位。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">4</span> 血行力学 CFD</h2>
+  <p class="lead">拍動流CFDで TAWSS/OSI/RRT を評価。瘤中央は低WSS＋高OSI＝血栓形成・壁変性の環境。</p>
+  <div class="grid g2">
+    <figure><img src="assets/fig4_tawss.png" alt="TAWSS"><figcaption>TAWSS（時間平均WSS）。嚢で低値、腸骨で高値。</figcaption></figure>
+    <figure><img src="assets/fig5_osi.png" alt="OSI"><figcaption>OSI（振動ずり指数）。嚢部で高OSI＝血栓傾向。</figcaption></figure>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <b>OSIについての注記</b>
+    <ul>
+      <li>入口波形が<b>三相性（逆流を含む）</b>のため拡張期に壁全体でWSSが反転しOSIが底上げ。生理的には妥当だが局所識別力は乏しい。</li>
+      <li>破裂部位の局在評価は <b>TAWSS/RRT・壁応力</b>を主指標にするのが適切。</li>
+    </ul>
+  </div>
+  <h3 style="margin:26px 0 6px;font-size:15px;color:var(--mut)">参考：全大動脈CFD（可視化用）</h3>
+  <div class="grid g2">
+    <figure>
+      <video src="assets/vid2_wholeaorta_cfd.mp4" controls loop muted playsinline></video>
+      <figcaption>全大動脈（弓部〜腸骨、分枝込み）の拍動CFD。<span class="flag">可視化用・非定量</span>（境界層なし・出口面積比例）。</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/fig6_wholeaorta_streamlines.png" alt="全大動脈 流線">
+      <figcaption>全大動脈の流線（弓部分枝・内臓枝・腎動脈を含む）。腎動脈枝は壁応力FEAモデルにも活用。</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">5</span> 方法（要約）</h2>
+  <div class="card">
+    <ul>
+      <li><b>セグメンテーション</b>：TotalSegmentator（大動脈・腸骨・腎動脈ほか）。</li>
+      <li><b>壁応力</b>：中空壁シェル（marching cubes → meshpy/tetgen hole メッシュ）＋ scikit-fem 線形弾性。</li>
+      <li><b>CFD</b>：OpenFOAM（pimpleFoam）拍動流、TAWSS/OSI/RRT を後処理算出。</li>
+      <li>SimVascular 非依存の自作パイプライン。</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">6</span> 限界</h2>
+  <div class="card">
+    <ul>
+      <li><b>壁</b>：厚さ一様1.9mm・<b>ILT未考慮</b>・線形弾性・壁厚方向1要素。</li>
+      <li><b>変位</b>：長いモデルの端固定による境界アーティファクト（応力場は有効／組織支持ばねで改善可）。</li>
+      <li><b>時間差</b>：解析は破裂の約9.5か月前の幾何。破裂時までの growth は未反映。</li>
+      <li><b>CFD</b>：汎用入口波形・出口 p=0（RCR未）・Newtonian。全大動脈CFDは可視化用。</li>
+      <li>単一例・仮説生成的。強度分布（ILT/石灰化）未モデル化のため応力単独の局在予測には限界。</li>
+    </ul>
+  </div>
+</section>
+
+<div class="foot">
+  <b>倫理</b>：本症例研究は患者同意および施設倫理委員会の承認のもとで実施し、
+  掲載データは<b>匿名化</b>（氏名・ID・撮影日等の識別情報を削除、日付は相対表記）している。
+  図中の内部コード名は患者を特定しない。<br>
+  解析：OpenFOAM(pimpleFoam) ＋ 自作 meshpy/scikit-fem パイプライン, TotalSegmentator。生成 2026年。
+</div>
+
+</div>
+</body>
+</html>
