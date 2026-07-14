@@ -162,13 +162,61 @@
 </section>
 
 <section>
-  <h2><span class="n">5</span> 方法（要約）</h2>
+  <h2><span class="n">5</span> 方法（詳細）</h2>
+  <p class="lead">SimVascular 非依存の自作パイプライン。オープンソース（TotalSegmentator / OpenFOAM / scikit-fem / meshpy）のみで、
+  セグメンテーション → 幾何・メッシュ → 血流CFD → 壁応力FEA → 破裂照合を再現可能な形で構成した。</p>
+
+  <h3 style="margin:8px 0 6px;font-size:15px;color:var(--mut)">5.1 画像・セグメンテーション</h3>
   <div class="card">
     <ul>
-      <li><b>セグメンテーション</b>：TotalSegmentator（大動脈・腸骨・腎動脈ほか）。</li>
-      <li><b>壁応力</b>：中空壁シェル（marching cubes → meshpy/tetgen hole メッシュ）＋ scikit-fem 線形弾性。</li>
-      <li><b>CFD</b>：OpenFOAM（pimpleFoam）拍動流、TAWSS/OSI/RRT を後処理算出。</li>
-      <li>SimVascular 非依存の自作パイプライン。</li>
+      <li>造影CT（動脈相）を dcm2niix で DICOM→NIfTI 変換。</li>
+      <li><b>TotalSegmentator</b> で大動脈・左右腸骨動脈・左右腎動脈ほかを自動抽出し、AAA嚢〜腎ネック〜分岐〜腸骨を統合した解析マスクを作成。</li>
+    </ul>
+  </div>
+
+  <h3 style="margin:18px 0 6px;font-size:15px;color:var(--mut)">5.2 幾何・メッシュ生成</h3>
+  <div class="card">
+    <ul>
+      <li>マスクを平滑化し <b>marching cubes</b> で内腔（lumen）表面を再構成、面数をデシメーション（約2mm解像度）。</li>
+      <li><b>CFD</b>：内腔をそのまま流体領域として体積メッシュ化。</li>
+      <li><b>FEA（中空壁シェル）</b>：外側（嚢外表面）と内側（内腔表面）の2枚の閉曲面、および内腔内に置いた「穴（hole）」シード点を <b>meshpy / TetGen</b> に渡し、<b>壁の隙間のみ</b>を四面体で充填（実効厚 約1.9mm、約110万四面体）。<span class="tag">tetgen hole 法</span></li>
+    </ul>
+  </div>
+
+  <h3 style="margin:18px 0 6px;font-size:15px;color:var(--mut)">5.3 血流CFD（OpenFOAM pimpleFoam）</h3>
+  <div class="card">
+    <p style="margin:0 0 10px">非定常・非圧縮 <b>pimpleFoam</b>（OpenFOAM v2512）で拍動流を解析し、内腔壁面上で TAWSS/OSI/RRT を算出した。</p>
+    <table>
+      <tr><th>項目</th><th>設定</th></tr>
+      <tr><td>ソルバ</td><td>pimpleFoam（PIMPLE・非定常非圧縮）</td></tr>
+      <tr><td>乱流</td><td>k-ω SST（RANS）</td></tr>
+      <tr><td>血液物性</td><td>Newtonian, ρ = 1060 kg/m³, μ = 0.0035 Pa·s</td></tr>
+      <tr><td>入口</td><td>三相性 拍動流量波形（flowRateInletVelocity, Qwave.dat）</td></tr>
+      <tr><td>出口</td><td>静圧 p = 0（RCR 未使用）</td></tr>
+      <tr><td>壁</td><td>no-slip・剛体壁</td></tr>
+      <tr><td>並列</td><td>scotch 8分割 MPI</td></tr>
+      <tr><td>時間積分</td><td>3心拍を計算し、周期平均（fieldAverage）で WSS 統計を算出</td></tr>
+    </table>
+    <div class="sub" style="margin-top:8px">
+      TAWSS = 時間平均 |WSS|、OSI = 0.5·(1 − |⟨WSSベクトル⟩| / ⟨|WSS|⟩)、RRT = 1 / ((1 − 2·OSI)·TAWSS)。
+    </div>
+  </div>
+
+  <h3 style="margin:18px 0 6px;font-size:15px;color:var(--mut)">5.4 壁応力FEA（scikit-fem）</h3>
+  <div class="card">
+    <ul>
+      <li>中空壁シェルを線形弾性体としてモデル化（<b>scikit-fem</b>・四面体1次要素）。</li>
+      <li>材料：<b>E = 2 MPa, ν = 0.45</b>（動脈壁の近似・準非圧縮）。</li>
+      <li>荷重：内腔面に一様内圧 <b>P = 16 kPa（120 mmHg）</b>。境界条件：モデル両端＋分枝出口を固定。</li>
+      <li>出力：von Mises／最大主応力。拍動動画は内圧を 80↔120 mmHg で線形スケール（色が拍動・変位ワープなし）。</li>
+    </ul>
+  </div>
+
+  <h3 style="margin:18px 0 6px;font-size:15px;color:var(--mut)">5.5 破裂照合・可視化</h3>
+  <div class="card">
+    <ul>
+      <li>術中所見と破裂時CTで同定した<b>実破裂部位</b>（後壁・左・分岐部+約5cm）を破裂前モデル上に指定し、壁応力・血流指標と空間照合。</li>
+      <li>可視化は turbo 配色、回転動画に APLR（前後左右）方向インジケーターを付した。</li>
     </ul>
   </div>
 </section>
