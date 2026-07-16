@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>破裂腹部大動脈瘤 術前予測の後ろ向き検証（症例研究）</title>
-<meta name="description" content="破裂前CTからの壁応力・血流解析と、実際の破裂部位・術後経過の照合（匿名化症例研究）">
+<title>破裂腹部大動脈瘤 術前壁応力と破裂部位の後ろ向き比較（症例研究）</title>
+<meta name="description" content="破裂前CTからの壁応力・血流解析と、その後の破裂関連部位・術後経過の後ろ向き比較（匿名化症例研究）">
 <style>
   :root{ --bg:#0f1216; --card:#171b21; --ink:#e8ecf1; --mut:#9aa7b5; --line:#262d36;
          --accent:#e5484d; --good:#3ecf8e; --warn:#f5a524; }
@@ -44,7 +44,7 @@
 </head>
 <body>
 <header><div class="wrap">
-  <h1>破裂腹部大動脈瘤における 術前壁応力予測と破裂部位の後ろ向き検証</h1>
+  <h1>破裂腹部大動脈瘤における 術前壁応力と破裂部位の後ろ向き比較</h1>
   <div class="sub">単一症例・後ろ向き解析（匿名化）&nbsp;|&nbsp; 腎下部AAA</div>
   <div>
     <span class="pill">術前CT（破裂の約9.5か月前）</span>
@@ -58,12 +58,12 @@
 <section>
   <h2><span class="n">0</span> 概要</h2>
   <p class="lead">同一患者の腎下部腹部大動脈瘤について、<b>破裂の約9.5か月前の待機CT</b>から血流(CFD)・壁応力(FEA)を計算し、
-  実際の<b>破裂部位（後壁・左・分岐部から約5cm頭側）</b>および術後経過と照合した後ろ向き検証。</p>
+  実際の<b>破裂関連部位（後壁・左・分岐部から約5cm頭側）</b>および術後経過と比較した後ろ向き解析。</p>
   <div class="card">
     <b>要点</b>
     <ul>
-      <li>高応力域は破裂部位と<b>同じ後面側・同程度の頭尾レベル</b>に存在した。ただし<b>左右の限局性は一致せず</b>、
-      応力ピークは<b>対側（右後壁）</b>であった（詳細は3節）。壁厚一様・<b>ILT未考慮</b>という本モデルの限界による可能性がある。</li>
+      <li>左後壁の<b>局所的な応力上昇域</b>が、後の破裂関連形態と近い頭尾方向レベルにみられた。</li>
+      <li>一方、全体最大値は前壁にあり、posterior面の応力負荷も右側が左側より高かったため、<b>破裂部位を予測したとは結論しない</b>。</li>
       <li>破裂前 → 破裂 → 術後の3時点で瘤の<b>増大・破裂・修復</b>を三次元的に可視化。</li>
       <li>血流CFDでは瘤中央が<b>低WSS＋高OSI（血栓形成環境）</b>。壁応力（破裂力）と合わせ二面から評価。</li>
     </ul>
@@ -73,13 +73,10 @@
 
 <section>
   <h2><span class="n">★</span> 論文用 Figure（投稿パッケージ）</h2>
-  <p class="lead">同一症例の投稿用に整えた主要 Figure（相対表記・匿名化済み）。
-  <span class="flag">本パッケージは3節の定量再解析を受けて<b>投稿を保留し、記述を見直し中</b>。</span></p>
+  <p class="lead">同一症例の投稿用に整えた主要 Figure（相対表記・匿名化済み）。Figure 2は最大主応力を真のposterior方向から再描画し、再検証後の保守的な解釈に更新済み。</p>
   <figure>
-    <img src="assets/figM2_wallstress_concordance.png" alt="Figure 2 術前壁応力と破裂部位の後面比較">
-    <figcaption><b>Figure 2.</b> 後面での比較：術前の<b>高壁応力域</b>（B, 破線）と、破裂時CTの<b>破裂関連領域</b>（C, 破線）。
-    <span class="flag"><b>注：</b></span>3節の定量解析では、<b>後面側・頭尾レベルは対応する</b>ものの<b>左右の限局性は一致せず</b>、
-    応力ピークは<b>対側の右後壁</b>にあった。本図を「予測と実破裂の concordance」と読むことはできず、キャプションは見直し中。</figcaption>
+    <img src="assets/figM2_wallstress_concordance.png" alt="Figure 2 術前最大主応力と破裂関連部位の後ろ向き比較">
+    <figcaption><b>Figure 2.</b> 術前VR（A）、真のposterior方向から描画した最大主応力（B、0–720 kPa）、破裂時posterior VR（C）の比較。破線は左後壁の局所的応力上昇域と破裂関連形態を示す。全体最大値は前壁にあり、非剛体位置合わせも行っていないため、これは後ろ向きの定性的視覚比較であり、破裂部位予測の実証ではない。</figcaption>
   </figure>
   <figure style="margin-top:18px">
     <img src="assets/Codex_Figure4_intraoperative_selected_BC_fully_editable.jpg" alt="Figure 3 術中所見（緑矢印による破裂関連部位の表示）">
@@ -97,17 +94,22 @@
 </section>
 
 <section>
-  <h2><span class="n">2</span> 壁応力 FEA（腎動脈込みモデル）</h2>
-  <p class="lead">腎ネック〜左右腎動脈〜AAA嚢〜分岐〜左右腸骨の中空壁シェル（実効厚1.9mm）。線形弾性 E=2 MPa, ν=0.45,
-  内圧 16 kPa（120 mmHg）、端＋分枝出口固定。<span class="tag">meshpy tetgen-hole</span><span class="tag">約110万四面体</span></p>
+  <h2><span class="n">2</span> 壁応力 FEA（探索的モデル）</h2>
+  <p class="lead">破裂前CTAから外側の血栓含有瘤形状を抽出し、公称壁厚1.8 mmの中空壁モデルを作成。線形弾性 E=2 MPa, ν=0.45、
+  内圧16 kPa（120 mmHg）、近位・遠位切断面固定。最終モデルは235,180四面体で、外表面の最大主応力を評価した。</p>
+  <figure style="margin-bottom:18px">
+    <img src="assets/Codex_maximum_principal_stress_true_posterior_0_720kPa.png" alt="真のposterior方向から描画した最大主応力">
+    <figcaption><b>検証済みposterior最大主応力図。</b> L＝患者左、R＝患者右。表示範囲0–720 kPa。p95 444.2 kPa、p99 718.6 kPa。局所最大値はメッシュ依存性が高いため、分布統計を重視した。</figcaption>
+  </figure>
+  <p class="lead"><b>参考可視化：</b>以下の回転図・動画は別途作成した腎動脈込みモデルのvon Mises応力表示であり、上の最大主応力図およびFigure 2Bとは異なる。</p>
   <div class="grid g2">
     <figure>
       <video src="assets/vid1_wallstress_pulsatile.mp4" controls loop muted playsinline></video>
-      <figcaption>拍動する壁応力（回転＋心拍 80↔120 mmHg で色が拍動）。青=低, 赤=peak wall stress。<b>右下のボックス</b>＝現在の解剖学的視方向（A=前 / P=後 / L=左 / R=右）。</figcaption>
+      <figcaption>参考：von Mises応力の回転＋圧力同期表示（80↔120 mmHg）。<b>右下のボックス</b>＝現在の解剖学的視方向（A=前 / P=後 / L=左 / R=右）。壁変形を解くFSIではない。</figcaption>
     </figure>
     <figure>
       <img src="assets/fig2_wallstress_anterior.png" alt="壁応力 前面">
-      <figcaption>壁応力マップ（<b>検証済みの前面</b>＝患者右が画像左）。高応力帯（赤）は嚢の稜線・くびれ部。</figcaption>
+      <figcaption>参考：von Mises応力マップ（前面）。Figure 2Bの最大主応力とは異なる指標。</figcaption>
     </figure>
   </div>
   <figure class="feature-video">
@@ -120,49 +122,43 @@
   </figure>
   <div class="card" style="margin-top:16px">
     <table>
-      <tr><th>部位</th><th class="num">median (kPa)</th><th class="num">p95 (kPa)</th></tr>
-      <tr><td>AAA嚢</td><td class="num">158</td><td class="num">351</td></tr>
-      <tr><td>腎レベル</td><td class="num">129</td><td class="num">305</td></tr>
-      <tr><td>壁全体</td><td class="num">106</td><td class="num">301</td></tr>
+      <tr><th>最大主応力（最終モデル）</th><th class="num">値 (kPa)</th></tr>
+      <tr><td>外表面・面積加重平均</td><td class="num">155.9</td></tr>
+      <tr><td>外表面 p95 / p99</td><td class="num">444.2 / 718.6</td></tr>
+      <tr><td>左posterior / 右posterior p95</td><td class="num">351.4 / 550.5</td></tr>
     </table>
-    <div class="sub">嚢の median 158 kPa は複数のメッシュ設定で一貫し頑健。</div>
+    <div class="sub">raw global maximum 2212.8 kPaは前壁にあり、局所最大値はメッシュ依存性が高いため慎重に解釈した。</div>
   </div>
 </section>
 
 <section>
   <h2><span class="n">3</span> 破裂部位との照合</h2>
-  <p class="lead">実破裂部位（後壁・左・分岐部+約5cm）を3Dモデル上に同定し、壁応力分布と定量照合した。
-  分岐部は実測 z≈1124 mm、破裂高位は z≈1174 mm。解剖軸は画像の affine と、独立した左右命名（腎動脈・腸骨動脈）、
-  臨床VRの L/R マーカーの<b>3系統で検証</b>済み。</p>
+  <p class="lead">術中所見と破裂時CTAから同定した左後壁の破裂関連部位を、腎動脈、分岐部、瘤輪郭をランドマークとして術前posterior壁応力図と視覚的に比較した。</p>
   <div class="grid g2">
     <figure>
-      <img src="assets/fig3_rupture_overlay.png" alt="真の後面ビューでの破裂部位と応力ピークの対比">
-      <figcaption>壁応力マップ（<b>検証済みの後面</b>＝患者左が画像左）。<b>黒</b>＝実際の破裂部位（左後壁・分岐部+5cm、局所 73 kPa）。
-      <b>マゼンタ</b>＝計算上の高応力ピーク（<b>対側</b>の右後壁）。破裂部位は青＝低応力域にあり、赤い高応力帯は患者右側を走る。</figcaption>
+      <img src="assets/Codex_maximum_principal_stress_true_posterior_0_720kPa.png" alt="posterior最大主応力マップ">
+      <figcaption>真のposterior方向から描画した最大主応力マップ。左後壁には局所的な上昇域があるが、全体最大値ではなく、posterior面では右側の応力負荷が高かった。</figcaption>
     </figure>
     <div class="card">
-      <b>照合の結果</b>
+      <b>比較の結果</b>
       <ul>
-        <li><span class="key">一致した点：</span><b>後面側</b>（後壁側が上位5%応力セルの70.9%／面積比52.6%＝<b>1.35倍の濃縮</b>）と、
-        <b>頭尾方向のレベル</b>（破裂高位 p95 370 kPa ＞ 嚢全体 351 kPa）。</li>
-        <li><span class="flag">一致しなかった点：</span><b>左右の限局性</b>。実際に破裂した左後壁は破裂高位で<b>最も応力が低い象限</b>で、
-        ピークは<b>対側の右後壁</b>にあった（下表）。</li>
-        <li><b>解釈の限界：</b>本モデルは壁厚一様・<b>ILT（壁在血栓）未考慮</b>・線形弾性。本症例は壁在血栓を伴い、
-        偏在ILTは応力分布を大きく変えることが知られる。<b>この不一致自体がモデルの限界に由来する可能性があり</b>、ILTを含めた再解析が必要。</li>
-        <li>破裂＝<b>局所応力 ≧ 局所強度</b>。壁応力は「力」のみを表し、壁の「強度」は非侵襲に測れない。応力単独では破裂部位を特定できない。</li>
+        <li><span class="key">観察所見：</span>左後壁の局所的応力上昇域が、後の破裂関連形態と近い頭尾方向レベルにみられた。</li>
+        <li><span class="flag">不一致：</span>全体最大値は前壁で、右posterior p95（550.5 kPa）は左posterior p95（351.4 kPa）より高値だった。</li>
+        <li><span class="flag">位置づけ：</span>非剛体点対点位置合わせ・術野とCTAの空間登録は未実施。単一例のpost hocな視覚比較であり、破裂部位予測の検証ではない。</li>
+        <li>壁応力は壁に加わる力を表す一方、患者固有の局所壁強度は測定していない。応力単独では破裂位置を決定できない。</li>
       </ul>
     </div>
   </div>
   <div class="card" style="margin-top:16px">
-    <b>破裂高位（z1150–1200、分岐部+5cm を含む帯）の象限別 von Mises</b>
+    <b>外表面最大主応力の検証値</b>
     <table>
-      <tr><th>象限</th><th class="num">median (kPa)</th><th class="num">p95 (kPa)</th><th class="num">上位5%のシェア</th><th class="num">面積比</th><th class="num">濃縮</th></tr>
-      <tr><td>右後壁 RIGHT-POST</td><td class="num">203</td><td class="num">447</td><td class="num">58.2%</td><td class="num">27.9%</td><td class="num"><b>2.1×</b></td></tr>
-      <tr><td><b>左後壁 LEFT-POST（実際の破裂部位）</b></td><td class="num">182</td><td class="num">324</td><td class="num">12.7%</td><td class="num">24.7%</td><td class="num"><b>0.5×</b></td></tr>
-      <tr><td>左前壁 LEFT-ANT</td><td class="num">175</td><td class="num">381</td><td class="num">27.4%</td><td class="num">23.8%</td><td class="num">1.2×</td></tr>
-      <tr><td>右前壁 RIGHT-ANT</td><td class="num">144</td><td class="num">245</td><td class="num">1.7%</td><td class="num">23.6%</td><td class="num">0.07×</td></tr>
+      <tr><th>領域</th><th class="num">p95 (kPa)</th><th class="num">raw maximum (kPa)</th></tr>
+      <tr><td>左posterior</td><td class="num">351.4</td><td class="num">899.7</td></tr>
+      <tr><td>右posterior</td><td class="num">550.5</td><td class="num">2078.7</td></tr>
+      <tr><td>左anterior</td><td class="num">535.0</td><td class="num">2212.8</td></tr>
+      <tr><td>右anterior</td><td class="num">356.4</td><td class="num">1064.7</td></tr>
     </table>
-    <div class="sub">象限は各2mm z-slab の壁重心を中心に分類（n=203,515セル）。AAA嚢全体（z1180–1250）では4象限がほぼ均一（median 152–165 kPa）で局在を認めない。</div>
+    <div class="sub">DICOM由来のRAS物理座標で象限を分類。raw maximumはメッシュ依存性の影響を受けやすいため、本文ではp95/p99などの分布統計を重視した。</div>
   </div>
 </section>
 
@@ -177,7 +173,7 @@
     <b>OSIについての注記</b>
     <ul>
       <li>入口波形が<b>三相性（逆流を含む）</b>のため拡張期に壁全体でWSSが反転しOSIが底上げ。生理的には妥当だが局所識別力は乏しい。</li>
-      <li>破裂部位の局在評価は <b>TAWSS/RRT・壁応力</b>を主指標にするのが適切。</li>
+      <li>このCFDは流体側のWSS指標を評価する別解析であり、Figure 1–3の破裂関連部位比較には使用していない。</li>
     </ul>
   </div>
   <h3 style="margin:26px 0 6px;font-size:15px;color:var(--mut)">参考：全大動脈CFD（可視化用）</h3>
@@ -211,7 +207,7 @@
     <ul>
       <li>マスクを平滑化し <b>marching cubes</b> で内腔（lumen）表面を再構成、面数をデシメーション（約2mm解像度）。</li>
       <li><b>CFD</b>：内腔をそのまま流体領域として体積メッシュ化。</li>
-      <li><b>FEA（中空壁シェル）</b>：外側（嚢外表面）と内側（内腔表面）の2枚の閉曲面、および内腔内に置いた「穴（hole）」シード点を <b>meshpy / TetGen</b> に渡し、<b>壁の隙間のみ</b>を四面体で充填（実効厚 約1.9mm、約110万四面体）。<span class="tag">tetgen hole 法</span></li>
+      <li><b>FEA（中空壁モデル）</b>：外側の血栓含有瘤形状を物理座標で再構成し、公称壁厚1.8 mm（計測された表面間距離の中央値1.83 mm）の中空壁を四面体メッシュ化。最終モデルは235,180要素。</li>
     </ul>
   </div>
 
@@ -240,15 +236,16 @@
     <ul>
       <li>中空壁シェルを線形弾性体としてモデル化（<b>scikit-fem</b>・四面体1次要素）。</li>
       <li>材料：<b>E = 2 MPa, ν = 0.45</b>（動脈壁の近似・準非圧縮）。</li>
-      <li>荷重：内腔面に一様内圧 <b>P = 16 kPa（120 mmHg）</b>。境界条件：モデル両端＋分枝出口を固定。</li>
-      <li>出力：von Mises／最大主応力。拍動動画は内圧を 80↔120 mmHg で線形スケール（色が拍動・変位ワープなし）。</li>
+      <li>荷重：内腔面に一様内圧 <b>P = 16 kPa（120 mmHg）</b>。境界条件：近位・遠位切断面を固定。</li>
+      <li>主要出力：切断端を除外した外表面の最大主応力。局所最大値はメッシュ依存性が高いため、面積加重平均およびp95/p99を重視。</li>
+      <li>参考動画は別モデルのvon Mises応力を内圧80↔120 mmHgで線形スケールした表示（色変化のみ、変位ワープなし）。</li>
     </ul>
   </div>
 
   <h3 style="margin:18px 0 6px;font-size:15px;color:var(--mut)">5.5 破裂照合・可視化</h3>
   <div class="card">
     <ul>
-      <li>術中所見と破裂時CTで同定した<b>実破裂部位</b>（後壁・左・分岐部+約5cm）を破裂前モデル上に指定し、壁応力・血流指標と空間照合。</li>
+      <li>術中所見と破裂時CTAで同定した<b>破裂関連部位</b>（後壁・左・分岐部+約5cm）を、腎動脈・分岐部・瘤輪郭を用いて破裂前モデルと視覚比較。非剛体点対点位置合わせは未実施。</li>
       <li>可視化は turbo 配色、回転動画に APLR（前後左右）方向インジケーターを付した。</li>
     </ul>
   </div>
@@ -258,11 +255,11 @@
   <h2><span class="n">6</span> 限界</h2>
   <div class="card">
     <ul>
-      <li><b>壁</b>：厚さ一様1.9mm・<b>ILT未考慮</b>・線形弾性・壁厚方向1要素。</li>
-      <li><b>変位</b>：長いモデルの端固定による境界アーティファクト（応力場は有効／組織支持ばねで改善可）。</li>
+      <li><b>壁</b>：厚さ一様1.8mm・患者固有壁厚／材料特性／局所壁強度を未測定・線形弾性。ILTの荷重伝達を明示的にモデル化していない。</li>
+      <li><b>境界条件</b>：切断端固定と一様圧負荷を用いた探索的モデルで、局所最大値にはメッシュ依存性がある。</li>
       <li><b>時間差</b>：解析は破裂の約9.5か月前の幾何。破裂時までの growth は未反映。</li>
       <li><b>CFD</b>：汎用入口波形・出口 p=0（RCR未）・Newtonian。全大動脈CFDは可視化用。</li>
-      <li>単一例・仮説生成的。強度分布（ILT/石灰化）未モデル化のため応力単独の局在予測には限界。</li>
+      <li>単一例・仮説生成的。時点間の非剛体位置合わせと術野の空間登録を行っておらず、破裂部位の予測精度を示すものではない。</li>
     </ul>
   </div>
 </section>
@@ -272,7 +269,8 @@
   掲載データは<b>匿名化</b>（氏名・ID・撮影日等の識別情報を削除、日付は相対表記）している。
   図中の内部コード名は患者を特定しない。<br>
   <b>Acknowledgements</b>：Not applicable.<br>
-  解析：OpenFOAM(pimpleFoam) ＋ 自作 meshpy/scikit-fem パイプライン, TotalSegmentator。生成 2026年。
+  <b>Funding</b>：なし。<b>Competing interests</b>：なし。<br>
+  解析：OpenFOAM(pimpleFoam) ＋ scikit-fem パイプライン, TotalSegmentator。OpenAI Codexは著者監督下でコード作成支援、数値の照合、原稿・Figure整備に使用し、全内容は著者が検証し責任を負う。生成・更新 2026年。
 </div>
 
 </div>
