@@ -62,7 +62,8 @@
   <div class="card">
     <b>要点</b>
     <ul>
-      <li>壁応力FEA上の<b>高応力部位が、実際の破裂部位と一致</b>（術中所見・破裂CTで同定）。</li>
+      <li>高応力域は破裂部位と<b>同じ後面側・同程度の頭尾レベル</b>に存在した。ただし<b>左右の限局性は一致せず</b>、
+      応力ピークは<b>対側（右後壁）</b>であった（詳細は3節）。壁厚一様・<b>ILT未考慮</b>という本モデルの限界による可能性がある。</li>
       <li>破裂前 → 破裂 → 術後の3時点で瘤の<b>増大・破裂・修復</b>を三次元的に可視化。</li>
       <li>血流CFDでは瘤中央が<b>低WSS＋高OSI（血栓形成環境）</b>。壁応力（破裂力）と合わせ二面から評価。</li>
     </ul>
@@ -72,10 +73,13 @@
 
 <section>
   <h2><span class="n">★</span> 論文用 Figure（投稿パッケージ）</h2>
-  <p class="lead">同一症例の投稿用に整えた主要 Figure（相対表記・匿名化済み）。</p>
+  <p class="lead">同一症例の投稿用に整えた主要 Figure（相対表記・匿名化済み）。
+  <span class="flag">本パッケージは3節の定量再解析を受けて<b>投稿を保留し、記述を見直し中</b>。</span></p>
   <figure>
-    <img src="assets/figM2_wallstress_concordance.png" alt="Figure 2 壁応力と破裂部位の concordance">
-    <figcaption><b>Figure 2.</b> 術前の<b>高壁応力部位</b>（B, 破線）と、破裂時CTの<b>破裂部位</b>（C, 破線）の空間的一致。予測と実破裂の concordance（本症例の主要所見）。</figcaption>
+    <img src="assets/figM2_wallstress_concordance.png" alt="Figure 2 術前壁応力と破裂部位の後面比較">
+    <figcaption><b>Figure 2.</b> 後面での比較：術前の<b>高壁応力域</b>（B, 破線）と、破裂時CTの<b>破裂関連領域</b>（C, 破線）。
+    <span class="flag"><b>注：</b></span>3節の定量解析では、<b>後面側・頭尾レベルは対応する</b>ものの<b>左右の限局性は一致せず</b>、
+    応力ピークは<b>対側の右後壁</b>にあった。本図を「予測と実破裂の concordance」と読むことはできず、キャプションは見直し中。</figcaption>
   </figure>
   <figure style="margin-top:18px">
     <img src="assets/Codex_Figure4_intraoperative_selected_BC_fully_editable.jpg" alt="Figure 3 術中所見（緑矢印による破裂関連部位の表示）">
@@ -103,7 +107,7 @@
     </figure>
     <figure>
       <img src="assets/fig2_wallstress_anterior.png" alt="壁応力 前面">
-      <figcaption>壁応力マップ（前面）。高応力帯（赤）は嚢の稜線・くびれ部。</figcaption>
+      <figcaption>壁応力マップ（<b>検証済みの前面</b>＝患者右が画像左）。高応力帯（赤）は嚢の稜線・くびれ部。</figcaption>
     </figure>
   </div>
   <figure class="feature-video">
@@ -127,20 +131,38 @@
 
 <section>
   <h2><span class="n">3</span> 破裂部位との照合</h2>
-  <p class="lead">実破裂部位（後壁・左・分岐部+約5cm）を3Dモデル上に指定し、壁応力・血流指標と重ねた。</p>
+  <p class="lead">実破裂部位（後壁・左・分岐部+約5cm）を3Dモデル上に同定し、壁応力分布と定量照合した。
+  分岐部は実測 z≈1124 mm、破裂高位は z≈1174 mm。解剖軸は画像の affine と、独立した左右命名（腎動脈・腸骨動脈）、
+  臨床VRの L/R マーカーの<b>3系統で検証</b>済み。</p>
   <div class="grid g2">
     <figure>
-      <img src="assets/fig3_rupture_overlay.png" alt="破裂部位オーバーレイ">
-      <figcaption>壁応力マップ（後面）＋実破裂部位。高応力帯が破裂部位に一致。</figcaption>
+      <img src="assets/fig3_rupture_overlay.png" alt="真の後面ビューでの破裂部位と応力ピークの対比">
+      <figcaption>壁応力マップ（<b>検証済みの後面</b>＝患者左が画像左）。<b>黒</b>＝実際の破裂部位（左後壁・分岐部+5cm、局所 73 kPa）。
+      <b>マゼンタ</b>＝計算上の高応力ピーク（<b>対側</b>の右後壁）。破裂部位は青＝低応力域にあり、赤い高応力帯は患者右側を走る。</figcaption>
     </figure>
     <div class="card">
-      <b>照合の位置づけ</b>
+      <b>照合の結果</b>
       <ul>
-        <li><span class="key">陽性所見：</span>壁応力の高値領域と実破裂部位が一致。</li>
-        <li><span class="flag">精緻化予定：</span>破裂CTでの厳密な位置決めと ILT（壁在血栓）モデル化により定量照合を強化。</li>
-        <li>破裂＝<b>局所応力 ≧ 局所強度</b>。応力(FEA)＝力、低WSS/高OSI/ILT＝壁の脆弱化。両者の重なりが破裂リスク最大部位。</li>
+        <li><span class="key">一致した点：</span><b>後面側</b>（後壁側が上位5%応力セルの70.9%／面積比52.6%＝<b>1.35倍の濃縮</b>）と、
+        <b>頭尾方向のレベル</b>（破裂高位 p95 370 kPa ＞ 嚢全体 351 kPa）。</li>
+        <li><span class="flag">一致しなかった点：</span><b>左右の限局性</b>。実際に破裂した左後壁は破裂高位で<b>最も応力が低い象限</b>で、
+        ピークは<b>対側の右後壁</b>にあった（下表）。</li>
+        <li><b>解釈の限界：</b>本モデルは壁厚一様・<b>ILT（壁在血栓）未考慮</b>・線形弾性。本症例は壁在血栓を伴い、
+        偏在ILTは応力分布を大きく変えることが知られる。<b>この不一致自体がモデルの限界に由来する可能性があり</b>、ILTを含めた再解析が必要。</li>
+        <li>破裂＝<b>局所応力 ≧ 局所強度</b>。壁応力は「力」のみを表し、壁の「強度」は非侵襲に測れない。応力単独では破裂部位を特定できない。</li>
       </ul>
     </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <b>破裂高位（z1150–1200、分岐部+5cm を含む帯）の象限別 von Mises</b>
+    <table>
+      <tr><th>象限</th><th class="num">median (kPa)</th><th class="num">p95 (kPa)</th><th class="num">上位5%のシェア</th><th class="num">面積比</th><th class="num">濃縮</th></tr>
+      <tr><td>右後壁 RIGHT-POST</td><td class="num">203</td><td class="num">447</td><td class="num">58.2%</td><td class="num">27.9%</td><td class="num"><b>2.1×</b></td></tr>
+      <tr><td><b>左後壁 LEFT-POST（実際の破裂部位）</b></td><td class="num">182</td><td class="num">324</td><td class="num">12.7%</td><td class="num">24.7%</td><td class="num"><b>0.5×</b></td></tr>
+      <tr><td>左前壁 LEFT-ANT</td><td class="num">175</td><td class="num">381</td><td class="num">27.4%</td><td class="num">23.8%</td><td class="num">1.2×</td></tr>
+      <tr><td>右前壁 RIGHT-ANT</td><td class="num">144</td><td class="num">245</td><td class="num">1.7%</td><td class="num">23.6%</td><td class="num">0.07×</td></tr>
+    </table>
+    <div class="sub">象限は各2mm z-slab の壁重心を中心に分類（n=203,515セル）。AAA嚢全体（z1180–1250）では4象限がほぼ均一（median 152–165 kPa）で局在を認めない。</div>
   </div>
 </section>
 
