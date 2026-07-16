@@ -73,10 +73,10 @@
 
 <section>
   <h2><span class="n">★</span> 論文用 Figure（投稿パッケージ）</h2>
-  <p class="lead">同一症例の投稿用に整えた主要 Figure（相対表記・匿名化済み）。Figure 2は最大主応力を真のposterior方向から再描画し、再検証後の保守的な解釈に更新済み。</p>
+  <p class="lead">同一症例の投稿用に整えた主要 Figure（相対表記・匿名化済み）。Figure 2は著者指定のposterior壁応力画像（0–430 kPa）へ更新した。</p>
   <figure>
-    <img src="assets/figM2_wallstress_concordance.png" alt="Figure 2 術前最大主応力と破裂関連部位の後ろ向き比較">
-    <figcaption><b>Figure 2.</b> 術前VR（A）、真のposterior方向から描画した最大主応力（B、0–720 kPa）、破裂時posterior VR（C）の比較。破線は左後壁の局所的応力上昇域と破裂関連形態を示す。全体最大値は前壁にあり、非剛体位置合わせも行っていないため、これは後ろ向きの定性的視覚比較であり、破裂部位予測の実証ではない。</figcaption>
+    <img src="assets/figM2_wallstress_concordance.png" alt="Figure 2 術前posterior壁応力と破裂関連部位の後ろ向き比較">
+    <figcaption><b>Figure 2.</b> 術前VR（A）、別の腎動脈込み探索的FEAモデルによるposterior von Mises壁応力（B、0–430 kPa）、破裂時posterior VR（C）の比較。Panel Bは定性的な局所分布の可視化であり、本文の最大主応力統計の算出元ではない。破線は左後壁の局所的応力上昇域と破裂関連形態を示す。非剛体位置合わせは行っておらず、破裂部位予測の実証ではない。<b>注：</b>画像内のBタイトルは元データと不一致であり、投稿前の修正が必要。</figcaption>
   </figure>
   <figure style="margin-top:18px">
     <img src="assets/Codex_Figure4_intraoperative_selected_BC_fully_editable.jpg" alt="Figure 3 術中所見（緑矢印による破裂関連部位の表示）">
@@ -101,7 +101,7 @@
     <img src="assets/Codex_maximum_principal_stress_true_posterior_0_720kPa.png" alt="真のposterior方向から描画した最大主応力">
     <figcaption><b>検証済みposterior最大主応力図。</b> L＝患者左、R＝患者右。表示範囲0–720 kPa。p95 444.2 kPa、p99 718.6 kPa。局所最大値はメッシュ依存性が高いため、分布統計を重視した。</figcaption>
   </figure>
-  <p class="lead"><b>参考可視化：</b>以下の回転図・動画は別途作成した腎動脈込みモデルのvon Mises応力表示であり、上の最大主応力図およびFigure 2Bとは異なる。</p>
+  <p class="lead"><b>参考可視化：</b>以下の回転図・動画も別途作成した腎動脈込みモデルのvon Mises応力表示であり、検証済みposterior最大主応力図とは異なる。Figure 2Bはこの探索的モデルと同系統の表示である。</p>
   <div class="grid g2">
     <figure>
       <video src="assets/vid1_wallstress_pulsatile.mp4" controls loop muted playsinline></video>
@@ -109,7 +109,7 @@
     </figure>
     <figure>
       <img src="assets/fig2_wallstress_anterior.png" alt="壁応力 前面">
-      <figcaption>参考：von Mises応力マップ（前面）。Figure 2Bの最大主応力とは異なる指標。</figcaption>
+      <figcaption>参考：von Mises応力マップ（前面）。Figure 2Bと同じ応力成分を用いた別視点の表示。</figcaption>
     </figure>
   </div>
   <figure class="feature-video">

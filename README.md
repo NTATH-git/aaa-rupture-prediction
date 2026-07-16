@@ -20,7 +20,9 @@ site in an infrarenal abdominal aortic aneurysm — a de-identified case study.
 - セグメンテーション：TotalSegmentator
 - FEA：scikit-fem、235,180四面体、公称壁厚1.8 mm、E=2 MPa、ν=0.45、内圧16 kPa、最大主応力
 - CFD：OpenFOAM v2512 / pimpleFoam、823,279セル、腎下部三相性入口波形（平均1.2 L/min）、0.9秒周期（約67 bpm）、3周期中の最終周期を解析
-- Figure 2：DICOM由来のRAS物理座標を確認した真のposterior表示、0–720 kPa
+- Figure 2：著者指定のposterior von Mises壁応力表示（別の腎動脈込み探索的モデル、0–430 kPa）。定性的可視化として使用
+
+注意：採用したFigure 2Bの画像内タイトルは `maximum principal wall stress` ですが、保存された元スカラー場はvon Mises応力です。公開HTMLと原稿legendは元データに合わせて記載しています。投稿前に画像内タイトルを修正するか、最大主応力データから再描画してください。
 
 ## 限界
 
