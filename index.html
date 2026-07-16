@@ -24,6 +24,7 @@
   .lead{color:var(--mut);margin:0 0 18px;font-size:14.5px}
   figure{margin:0 0 8px}
   img,video{width:100%;border-radius:12px;border:1px solid var(--line);background:#000;display:block}
+  .feature-video{max-width:720px;margin:20px auto 8px}
   figcaption{color:var(--mut);font-size:12.5px;margin-top:8px}
   .grid{display:grid;gap:18px}
   .g2{grid-template-columns:1fr 1fr}
@@ -65,6 +66,7 @@
       <li>破裂前 → 破裂 → 術後の3時点で瘤の<b>増大・破裂・修復</b>を三次元的に可視化。</li>
       <li>血流CFDでは瘤中央が<b>低WSS＋高OSI（血栓形成環境）</b>。壁応力（破裂力）と合わせ二面から評価。</li>
     </ul>
+    <p style="margin:14px 0 0"><b>臨床経過：</b>2025年5月CTA後、患者本人が経過観察を希望したため待機手術は行われなかった。血管リスク因子は高血圧・高脂血症で、降圧薬およびスタチンを内服していた。</p>
   </div>
 </section>
 
@@ -76,8 +78,8 @@
     <figcaption><b>Figure 2.</b> 術前の<b>高壁応力部位</b>（B, 破線）と、破裂時CTの<b>破裂部位</b>（C, 破線）の空間的一致。予測と実破裂の concordance（本症例の主要所見）。</figcaption>
   </figure>
   <figure style="margin-top:18px">
-    <img src="assets/Codex_Figure4_intraoperative_selected_BC_fully_editable.jpg" alt="Figure 4 術中所見（緑矢印による破裂関連部位の表示）">
-    <figcaption><b>Figure 4.</b> 術中所見（手術記録からの拡大静止画）。露出した瘤（A）と、破裂に関連する術野（B）。<span class="mut">※術中写真</span></figcaption>
+    <img src="assets/Codex_Figure4_intraoperative_selected_BC_fully_editable.jpg" alt="Figure 3 術中所見（緑矢印による破裂関連部位の表示）">
+    <figcaption><b>Figure 3.</b> 破裂に関連する左後壁の術中拡大像。（A）天井カメラ、（B）術者装着カメラ。<span class="mut">※術中写真</span></figcaption>
   </figure>
 </section>
 
@@ -104,6 +106,14 @@
       <figcaption>壁応力マップ（前面）。高応力帯（赤）は嚢の稜線・くびれ部。</figcaption>
     </figure>
   </div>
+  <figure class="feature-video">
+    <video
+      src="assets/Codex_wall_stress_FEA_posterior_fixed_pulsatile_0_430kPa.mp4"
+      poster="assets/Codex_wall_stress_FEA_posterior_0_430kPa.png"
+      controls loop muted playsinline preload="metadata"
+      aria-label="Posterior固定の壁応力FEA心拍同期動画"></video>
+    <figcaption><b>Posterior固定・壁応力FEA。</b> カメラと血管形状は動かさず、80↔120 mmHgの圧変化に対応してvon Mises壁応力の色だけが変化する（0–430 kPa固定表示、60 bpm）。線形FEAの圧力同期表示であり、壁変形を扱うFSIではない。</figcaption>
+  </figure>
   <div class="card" style="margin-top:16px">
     <table>
       <tr><th>部位</th><th class="num">median (kPa)</th><th class="num">p95 (kPa)</th></tr>
@@ -185,17 +195,18 @@
 
   <h3 style="margin:18px 0 6px;font-size:15px;color:var(--mut)">5.3 血流CFD（OpenFOAM pimpleFoam）</h3>
   <div class="card">
-    <p style="margin:0 0 10px">非定常・非圧縮 <b>pimpleFoam</b>（OpenFOAM v2512）で拍動流を解析し、内腔壁面上で TAWSS/OSI/RRT を算出した。</p>
+    <p style="margin:0 0 10px">非定常・非圧縮 <b>pimpleFoam</b>（OpenFOAM v2512）で、823,279セルの腎下部モデルを3心拍解析し、最終心拍から内腔壁面上の TAWSS/OSI/RRT を算出した。</p>
     <table>
       <tr><th>項目</th><th>設定</th></tr>
       <tr><td>ソルバ</td><td>pimpleFoam（PIMPLE・非定常非圧縮）</td></tr>
       <tr><td>乱流</td><td>k-ω SST（RANS）</td></tr>
       <tr><td>血液物性</td><td>Newtonian, ρ = 1060 kg/m³, μ = 0.0035 Pa·s</td></tr>
-      <tr><td>入口</td><td>三相性 拍動流量波形（flowRateInletVelocity, Qwave.dat）</td></tr>
+      <tr><td>メッシュ</td><td>823,279セル</td></tr>
+      <tr><td>入口</td><td>腎下部・三相性拍動流量波形（平均1.2 L/min、flowRateInletVelocity, Qwave.dat）</td></tr>
       <tr><td>出口</td><td>静圧 p = 0（RCR 未使用）</td></tr>
       <tr><td>壁</td><td>no-slip・剛体壁</td></tr>
       <tr><td>並列</td><td>scotch 8分割 MPI</td></tr>
-      <tr><td>時間積分</td><td>3心拍を計算し、周期平均（fieldAverage）で WSS 統計を算出</td></tr>
+      <tr><td>時間積分</td><td>1心拍0.9秒（約67 bpm）。3心拍を計算し、最終心拍の周期平均（fieldAverage）で WSS 統計を算出</td></tr>
     </table>
     <div class="sub" style="margin-top:8px">
       TAWSS = 時間平均 |WSS|、OSI = 0.5·(1 − |⟨WSSベクトル⟩| / ⟨|WSS|⟩)、RRT = 1 / ((1 − 2·OSI)·TAWSS)。
@@ -235,9 +246,10 @@
 </section>
 
 <div class="foot">
-  <b>倫理</b>：本症例研究は患者同意および施設倫理委員会の承認のもとで実施し、
+  <b>倫理</b>：札幌医科大学の施設方針に基づき、本症例報告は臨床倫理委員会の承認を必要としない。患者本人から臨床情報・CT画像・術中写真の掲載同意を得ており、
   掲載データは<b>匿名化</b>（氏名・ID・撮影日等の識別情報を削除、日付は相対表記）している。
   図中の内部コード名は患者を特定しない。<br>
+  <b>Acknowledgements</b>：Not applicable.<br>
   解析：OpenFOAM(pimpleFoam) ＋ 自作 meshpy/scikit-fem パイプライン, TotalSegmentator。生成 2026年。
 </div>
 
